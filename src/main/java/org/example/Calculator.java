@@ -44,7 +44,7 @@ public class Calculator {
         } else {
             throw new Exception("Only one number system");
         }
-        return (calculate(leftValue,rightValue, operator)); // вписать метод calculate
+        return (calculate(leftValue,rightValue, operator));
     }
 
     static String calculate(int leftValue, int rightValue, String operator) throws Exception {
