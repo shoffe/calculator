@@ -113,8 +113,6 @@ class RomNum {
     public static int convertRimToArabic(String input) {
         int result = 0;
 
-
-
         for (int i = 0; i < romanNumbers.length; i++) {
             if (input.equals(romanNumbers[i])) {
                 result = i;
