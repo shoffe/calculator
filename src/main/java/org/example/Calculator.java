@@ -32,6 +32,7 @@ public class Calculator {
         String leftValueStr = symbol[0];
         String rightValueStr = symbol[2];
         int leftValue, rightValue, result = 0;
+        int flag = 0;
 
         if (isArabNumber(leftValueStr) && isArabNumber(rightValueStr)) {
             leftValue = Integer.parseInt(leftValueStr);
@@ -39,10 +40,19 @@ public class Calculator {
         } else if (!isArabNumber(leftValueStr) && !isArabNumber(rightValueStr)) {
             leftValue = RomNum.convertRimToArabic(leftValueStr);
             rightValue = RomNum.convertRimToArabic(rightValueStr);
+            flag = 1;
+            if (rightValue == 0) {
+                throw new Exception("dont / 0");
+            }
         } else if (rightValueStr.equals("0")) {
             throw new Exception("dont / 0");
         } else {
             throw new Exception("Only one number system");
+        }
+        if(flag == 1){
+            result = Integer.parseInt(calculate(leftValue,rightValue,operator));
+
+            return RomNum.convertArabToRim(result);
         }
         return (calculate(leftValue,rightValue, operator));
     }
@@ -87,20 +97,22 @@ public class Calculator {
 
 
 class RomNum {
+    private static String[] romanNumbers = {
+            "0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+            "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+            "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX",
+            "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+            "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L",
+            "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
+            "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
+            "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
+            "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+            "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
+    };
+
     public static int convertRimToArabic(String input) {
         int result = 0;
-        String[] romanNumbers = {
-                "0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-                "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
-                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX",
-                "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
-                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L",
-                "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
-                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
-                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
-                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
-                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
-        };
+
 
 
         for (int i = 0; i < romanNumbers.length; i++) {
@@ -111,12 +123,13 @@ class RomNum {
         return result;
     }
 
-    static boolean isRomNumber(String[] input, String[] romanNumbers) {
+    public static String convertArabToRim(int result) {
+
         for (int i = 0; i < romanNumbers.length; i++) {
-            if (input.equals(romanNumbers[i])) {
-                return true;
+            if (result == i) {
+                return String.valueOf(romanNumbers[i]);
             }
         }
-        return false;
+        return String.valueOf(result);
     }
 }
