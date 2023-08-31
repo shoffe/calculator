@@ -19,7 +19,7 @@ public class Calculator {
     public static String calc(String input) throws Exception {
         String[] symbol = input.split(" ");
 
-        Set<String> operators = new HashSet<>(List.of("+", "-", "*", "/")); //множество
+        Set<String> operators = new HashSet<>(List.of("+", "-", "*", "/")); 
         if (!operators.contains(symbol[1])) {
             throw new Exception("Incorrect operand");
         }
@@ -84,6 +84,8 @@ public class Calculator {
             return null;
         }
     }
+
+
 
     static boolean isArabNumber (String input){
         try {
