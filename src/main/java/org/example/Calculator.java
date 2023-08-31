@@ -41,14 +41,14 @@ public class Calculator {
             leftValue = RomNum.convertRimToArabic(leftValueStr);
             rightValue = RomNum.convertRimToArabic(rightValueStr);
             flag = 1;
-            if (rightValue == 0) {
-                throw new Exception("dont / 0");
-            }
-        } else if (rightValueStr.equals("0")) {
-            throw new Exception("dont / 0");
-        } else {
+        }  else {
             throw new Exception("Only one number system");
         }
+
+        if ((rightValue <= 0 || rightValue > 10) || (leftValue <= 0 || leftValue > 10)) {
+            throw new Exception("only 1,2,3,4,5,6,7,8,9,10");
+        }
+
         if(flag == 1){
             result = Integer.parseInt(calculate(leftValue,rightValue,operator));
 
