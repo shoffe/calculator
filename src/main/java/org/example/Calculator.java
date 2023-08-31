@@ -87,9 +87,9 @@ public class Calculator {
 
     static boolean isArabNumber (String input){
         try {
-            int value = Integer.parseInt(input);
-            return value >= 1 && value <= 10;
-        } catch (Exception e) {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
             return false;
         }
     }
