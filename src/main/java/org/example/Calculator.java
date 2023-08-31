@@ -51,7 +51,7 @@ public class Calculator {
 
         if(flag == 1){
             result = Integer.parseInt(calculate(leftValue,rightValue,operator));
-
+            if (result < 1) throw new Exception();
             return RomNum.convertArabToRim(result);
         }
         return (calculate(leftValue,rightValue, operator));
